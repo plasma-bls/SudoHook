@@ -85,6 +85,7 @@ int main(int argc,char *argv[]){
         }
     }
     
+    // setting termios attributes to the old values
     tcsetattr(STDIN_FILENO, TCSADRAIN, &old_t);
     
     if (!keepRunning) {
@@ -102,8 +103,8 @@ int main(int argc,char *argv[]){
         }
 
     
+     // missing the file write part, will do very soon
     
-    // setting attributes to the old value 
     
     
 
