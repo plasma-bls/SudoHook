@@ -1,4 +1,4 @@
-<small>disclaimer: the script has still some unoptimized things such as time and functions</small>
+<small>disclaimer: the script has still some unoptimized things such as time and functions and it's missing the file write part</small>
 ```
 ┏┓   ┓  ┓┏    ┓ 
 ┗┓┓┏┏┫┏┓┣┫┏┓┏┓┃┏   ┓ ┏┓
